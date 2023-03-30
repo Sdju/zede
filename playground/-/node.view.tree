@@ -32,9 +32,6 @@ $mol_page $mol_view
 			dom_name \footer
 			sub <= foot /$mol_view
 
-$mol_theme_auto $mol_plugin
-	attr * mol_theme <= theme \
-
 $mol_speck $mol_view
 	attr *
 		^
@@ -122,12 +119,8 @@ $mol_lights_toggle $mol_check_icon
 	hint @ \Toggle lights
 	checked?val <=> lights?val false
 
-$mol_paragraph $mol_view
-	line_height 24
-	letter_width 7
-	width_limit +Infinity
-	row_width 0
-	sub / <= title
+$mol_theme_auto $mol_plugin
+	attr * mol_theme <= theme \
 
 $mol_hotkey $mol_plugin
 	event *
@@ -171,38 +164,109 @@ $mol_string $mol_view
 			mod_ctrl <= submit_with_ctrl false
 			key * enter?event <=> submit?event null
 
+$mol_icon_minus $mol_icon path \M19,13H5V11H19V13Z
+
+$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
+
+$mol_number $mol_view
+	precision_view <= precision 1
+	precision_change <= precision 1
+	value_min -Infinity
+	value_max +Infinity
+	value? +NaN
+	enabled true
+	sub /
+		<= String $mol_string
+			- \ we don't want native number controls in mobile devices
+			- \ https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box
+			type <= type \tel
+			value?val <=> value_string?val \
+			hint <= hint \ 
+			enabled <= string_enabled <= enabled
+		<= Dec $mol_button_minor
+			event_click? <=> event_dec? null
+			enabled <= dec_enabled <= enabled
+			sub / <= dec_icon $mol_icon_minus
+		<= Inc $mol_button_minor
+			event_click? <=> event_inc? null
+			enabled <= inc_enabled <= enabled
+			sub / <= inc_icon $mol_icon_plus
+
+$mol_paragraph $mol_view
+	line_height 24
+	letter_width 7
+	width_limit +Infinity
+	row_width 0
+	sub / <= title
+
 $zede_playground $mol_page
 	title \ Zede tests
+	tools /
+		<= Lighter $mol_lights_toggle
 	plugins /
 		<= Theme $mol_theme_auto
 	body /
-		<= Lighter $mol_lights_toggle
-		<= Panel $zede_playground_panel
+		<= Themes $mol_view
+			sub /
+				<= Color1 $zede_playground_color
+					color \ var(--mol_theme_back)
+				<= Color2 $zede_playground_color
+					color \ var(--mol_theme_text)
+				<= Color3 $zede_playground_color
+					color \ var(--mol_theme_field)
+				<= Color4 $zede_playground_color
+					color \ var(--mol_theme_card)
+				<= Color5 $zede_playground_color
+					color \ var(--mol_theme_hover)
+				<= Color6 $zede_playground_color
+					color \ var(--mol_theme_line)
+				<= Color7 $zede_playground_color
+					color \ var(--mol_theme_shade)
+				<= Color8 $zede_playground_color
+					color \ var(--mol_theme_control)
+				<= Color9 $zede_playground_color
+					color \ var(--mol_theme_current)
+				<= Color10 $zede_playground_color
+					color \ var(--mol_theme_special)
+				<= Color11 $zede_playground_color
+					color \ var(--mol_theme_focus)
+					
+		<= Panel2 $zede_playground_panel
 
 $zede_playground_panel $mol_view
 	sub /
-		<= Color1 $zede_playground_color
-			color \ var(--mol_theme_back)
-		<= Color2 $zede_playground_color
-			color \ var(--mol_theme_text)
-		<= Color3 $zede_playground_color
-			color \ var(--mol_theme_field)
-		<= Color4 $zede_playground_color
-			color \ var(--mol_theme_card)
-		<= Color5 $zede_playground_color
-			color \ var(--mol_theme_hover)
-		<= Color6 $zede_playground_color
-			color \ var(--mol_theme_line)
-		<= Color7 $zede_playground_color
-			color \ var(--mol_theme_shade)
-		<= Color8 $zede_playground_color
-			color \ var(--mol_theme_control)
-		<= Color9 $zede_playground_color
-			color \ var(--mol_theme_current)
-		<= Color10 $zede_playground_color
-			color \ var(--mol_theme_special)
-		<= Color11 $zede_playground_color
-			color \ var(--mol_theme_focus)
+		<= Title $mol_view
+			sub /
+				<= Output $zede_playground_color_output
+					color <= color *
+						h <= h? 0
+						s <= s? 0
+						l <= l? 0
+						a <= a? 1
+		<= Hue $zede_playground_number
+			value? <=> h?
+		<= Saturation $zede_playground_number
+			value? <=> s?
+		<= Lightness $zede_playground_number
+			value? <=> l?
+		<= Alpha $zede_playground_number
+			value? <=> a?
+			
+$zede_playground_number $mol_number
+	value_min 0
+	value_max 1
+	precision_change 0.1
+	precision_view 0.1
+		
+$zede_playground_color_output $mol_view
+	color *
+		h 0
+		s 0
+		l 0
+		a 1
+	sub /
+		<= Color $zede_playground_color
+			color <= formatted
 
 $zede_playground_color $mol_view
 	color \ var(--mol_theme_line)

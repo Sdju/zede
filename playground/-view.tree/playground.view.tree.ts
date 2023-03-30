@@ -12,6 +12,17 @@ namespace $ {
 		
 		/**
 		 * ```tree
+		 * tools / <= Lighter
+		 * ```
+		 */
+		tools() {
+			return [
+				this.Lighter()
+			] as readonly any[]
+		}
+		
+		/**
+		 * ```tree
 		 * plugins / <= Theme
 		 * ```
 		 */
@@ -24,27 +35,15 @@ namespace $ {
 		/**
 		 * ```tree
 		 * body /
-		 * 	<= Lighter
-		 * 	<= Panel
+		 * 	<= Themes
+		 * 	<= Panel2
 		 * ```
 		 */
 		body() {
 			return [
-				this.Lighter(),
-				this.Panel()
+				this.Themes(),
+				this.Panel2()
 			] as readonly any[]
-		}
-		
-		/**
-		 * ```tree
-		 * Theme $mol_theme_auto
-		 * ```
-		 */
-		@ $mol_mem
-		Theme() {
-			const obj = new this.$.$mol_theme_auto()
-			
-			return obj
 		}
 		
 		/**
@@ -61,49 +60,14 @@ namespace $ {
 		
 		/**
 		 * ```tree
-		 * Panel $zede_playground_panel
+		 * Theme $mol_theme_auto
 		 * ```
 		 */
 		@ $mol_mem
-		Panel() {
-			const obj = new this.$.$zede_playground_panel()
+		Theme() {
+			const obj = new this.$.$mol_theme_auto()
 			
 			return obj
-		}
-	}
-	
-	export class $zede_playground_panel extends $mol_view {
-		
-		/**
-		 * ```tree
-		 * sub /
-		 * 	<= Color1
-		 * 	<= Color2
-		 * 	<= Color3
-		 * 	<= Color4
-		 * 	<= Color5
-		 * 	<= Color6
-		 * 	<= Color7
-		 * 	<= Color8
-		 * 	<= Color9
-		 * 	<= Color10
-		 * 	<= Color11
-		 * ```
-		 */
-		sub() {
-			return [
-				this.Color1(),
-				this.Color2(),
-				this.Color3(),
-				this.Color4(),
-				this.Color5(),
-				this.Color6(),
-				this.Color7(),
-				this.Color8(),
-				this.Color9(),
-				this.Color10(),
-				this.Color11()
-			] as readonly any[]
 		}
 		
 		/**
@@ -256,6 +220,311 @@ namespace $ {
 			const obj = new this.$.$zede_playground_color()
 			
 			obj.color = () => " var(--mol_theme_focus)"
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Themes $mol_view sub /
+		 * 	<= Color1
+		 * 	<= Color2
+		 * 	<= Color3
+		 * 	<= Color4
+		 * 	<= Color5
+		 * 	<= Color6
+		 * 	<= Color7
+		 * 	<= Color8
+		 * 	<= Color9
+		 * 	<= Color10
+		 * 	<= Color11
+		 * ```
+		 */
+		@ $mol_mem
+		Themes() {
+			const obj = new this.$.$mol_view()
+			
+			obj.sub = () => [
+				this.Color1(),
+				this.Color2(),
+				this.Color3(),
+				this.Color4(),
+				this.Color5(),
+				this.Color6(),
+				this.Color7(),
+				this.Color8(),
+				this.Color9(),
+				this.Color10(),
+				this.Color11()
+			] as readonly any[]
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Panel2 $zede_playground_panel
+		 * ```
+		 */
+		@ $mol_mem
+		Panel2() {
+			const obj = new this.$.$zede_playground_panel()
+			
+			return obj
+		}
+	}
+	
+	export class $zede_playground_panel extends $mol_view {
+		
+		/**
+		 * ```tree
+		 * sub /
+		 * 	<= Title
+		 * 	<= Hue
+		 * 	<= Saturation
+		 * 	<= Lightness
+		 * 	<= Alpha
+		 * ```
+		 */
+		sub() {
+			return [
+				this.Title(),
+				this.Hue(),
+				this.Saturation(),
+				this.Lightness(),
+				this.Alpha()
+			] as readonly any[]
+		}
+		
+		/**
+		 * ```tree
+		 * h? 0
+		 * ```
+		 */
+		@ $mol_mem
+		h(next?: any) {
+			if ( next !== undefined ) return next as never
+			return 0
+		}
+		
+		/**
+		 * ```tree
+		 * s? 0
+		 * ```
+		 */
+		@ $mol_mem
+		s(next?: any) {
+			if ( next !== undefined ) return next as never
+			return 0
+		}
+		
+		/**
+		 * ```tree
+		 * l? 0
+		 * ```
+		 */
+		@ $mol_mem
+		l(next?: any) {
+			if ( next !== undefined ) return next as never
+			return 0
+		}
+		
+		/**
+		 * ```tree
+		 * a? 1
+		 * ```
+		 */
+		@ $mol_mem
+		a(next?: any) {
+			if ( next !== undefined ) return next as never
+			return 1
+		}
+		
+		/**
+		 * ```tree
+		 * color *
+		 * 	h <= h?
+		 * 	s <= s?
+		 * 	l <= l?
+		 * 	a <= a?
+		 * ```
+		 */
+		color() {
+			return {
+				h: this.h(),
+				s: this.s(),
+				l: this.l(),
+				a: this.a()
+			}
+		}
+		
+		/**
+		 * ```tree
+		 * Output $zede_playground_color_output color <= color
+		 * ```
+		 */
+		@ $mol_mem
+		Output() {
+			const obj = new this.$.$zede_playground_color_output()
+			
+			obj.color = () => this.color()
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Title $mol_view sub / <= Output
+		 * ```
+		 */
+		@ $mol_mem
+		Title() {
+			const obj = new this.$.$mol_view()
+			
+			obj.sub = () => [
+				this.Output()
+			] as readonly any[]
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Hue $zede_playground_number value? <=> h?
+		 * ```
+		 */
+		@ $mol_mem
+		Hue() {
+			const obj = new this.$.$zede_playground_number()
+			
+			obj.value = (next?: any) => this.h(next)
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Saturation $zede_playground_number value? <=> s?
+		 * ```
+		 */
+		@ $mol_mem
+		Saturation() {
+			const obj = new this.$.$zede_playground_number()
+			
+			obj.value = (next?: any) => this.s(next)
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Lightness $zede_playground_number value? <=> l?
+		 * ```
+		 */
+		@ $mol_mem
+		Lightness() {
+			const obj = new this.$.$zede_playground_number()
+			
+			obj.value = (next?: any) => this.l(next)
+			
+			return obj
+		}
+		
+		/**
+		 * ```tree
+		 * Alpha $zede_playground_number value? <=> a?
+		 * ```
+		 */
+		@ $mol_mem
+		Alpha() {
+			const obj = new this.$.$zede_playground_number()
+			
+			obj.value = (next?: any) => this.a(next)
+			
+			return obj
+		}
+	}
+	
+	export class $zede_playground_number extends $mol_number {
+		
+		/**
+		 * ```tree
+		 * value_min 0
+		 * ```
+		 */
+		value_min() {
+			return 0
+		}
+		
+		/**
+		 * ```tree
+		 * value_max 1
+		 * ```
+		 */
+		value_max() {
+			return 1
+		}
+		
+		/**
+		 * ```tree
+		 * precision_change 0.1
+		 * ```
+		 */
+		precision_change() {
+			return 0.1
+		}
+		
+		/**
+		 * ```tree
+		 * precision_view 0.1
+		 * ```
+		 */
+		precision_view() {
+			return 0.1
+		}
+	}
+	
+	export class $zede_playground_color_output extends $mol_view {
+		
+		/**
+		 * ```tree
+		 * color *
+		 * 	h 0
+		 * 	s 0
+		 * 	l 0
+		 * 	a 1
+		 * ```
+		 */
+		color() {
+			return {
+				h: 0,
+				s: 0,
+				l: 0,
+				a: 1
+			}
+		}
+		
+		/**
+		 * ```tree
+		 * sub / <= Color
+		 * ```
+		 */
+		sub() {
+			return [
+				this.Color()
+			] as readonly any[]
+		}
+		
+		/**
+		 * ```tree
+		 * Color $zede_playground_color color <= formatted
+		 * ```
+		 */
+		@ $mol_mem
+		Color() {
+			const obj = new this.$.$zede_playground_color()
+			
+			obj.color = () => this.formatted()
 			
 			return obj
 		}

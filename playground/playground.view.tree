@@ -1,35 +1,71 @@
 $zede_playground $mol_page
 	title \ Zede tests
+	tools /
+		<= Lighter $mol_lights_toggle
 	plugins /
 		<= Theme $mol_theme_auto
 	body /
-		<= Lighter $mol_lights_toggle
-		<= Panel $zede_playground_panel
+		<= Themes $mol_view
+			sub /
+				<= Color1 $zede_playground_color
+					color \ var(--mol_theme_back)
+				<= Color2 $zede_playground_color
+					color \ var(--mol_theme_text)
+				<= Color3 $zede_playground_color
+					color \ var(--mol_theme_field)
+				<= Color4 $zede_playground_color
+					color \ var(--mol_theme_card)
+				<= Color5 $zede_playground_color
+					color \ var(--mol_theme_hover)
+				<= Color6 $zede_playground_color
+					color \ var(--mol_theme_line)
+				<= Color7 $zede_playground_color
+					color \ var(--mol_theme_shade)
+				<= Color8 $zede_playground_color
+					color \ var(--mol_theme_control)
+				<= Color9 $zede_playground_color
+					color \ var(--mol_theme_current)
+				<= Color10 $zede_playground_color
+					color \ var(--mol_theme_special)
+				<= Color11 $zede_playground_color
+					color \ var(--mol_theme_focus)
+					
+		<= Panel2 $zede_playground_panel
 
 $zede_playground_panel $mol_view
 	sub /
-		<= Color1 $zede_playground_color
-			color \ var(--mol_theme_back)
-		<= Color2 $zede_playground_color
-			color \ var(--mol_theme_text)
-		<= Color3 $zede_playground_color
-			color \ var(--mol_theme_field)
-		<= Color4 $zede_playground_color
-			color \ var(--mol_theme_card)
-		<= Color5 $zede_playground_color
-			color \ var(--mol_theme_hover)
-		<= Color6 $zede_playground_color
-			color \ var(--mol_theme_line)
-		<= Color7 $zede_playground_color
-			color \ var(--mol_theme_shade)
-		<= Color8 $zede_playground_color
-			color \ var(--mol_theme_control)
-		<= Color9 $zede_playground_color
-			color \ var(--mol_theme_current)
-		<= Color10 $zede_playground_color
-			color \ var(--mol_theme_special)
-		<= Color11 $zede_playground_color
-			color \ var(--mol_theme_focus)
+		<= Title $mol_view
+			sub /
+				<= Output $zede_playground_color_output
+					color <= color *
+						h <= h? 0
+						s <= s? 0
+						l <= l? 0
+						a <= a? 1
+		<= Hue $zede_playground_number
+			value? <=> h?
+		<= Saturation $zede_playground_number
+			value? <=> s?
+		<= Lightness $zede_playground_number
+			value? <=> l?
+		<= Alpha $zede_playground_number
+			value? <=> a?
+			
+$zede_playground_number $mol_number
+	value_min 0
+	value_max 1
+	precision_change 0.1
+	precision_view 0.1
+		
+$zede_playground_color_output $mol_view
+	color *
+		h 0
+		s 0
+		l 0
+		a 1
+	sub /
+		<= Color $zede_playground_color
+			color <= formatted
 
 $zede_playground_color $mol_view
 	color \ var(--mol_theme_line)

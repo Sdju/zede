@@ -68,27 +68,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    class $mol_after_tick extends $mol_object2 {
-        task: () => void;
-        promise: any;
-        cancelled: boolean;
-        constructor(task: () => void);
-        destructor(): void;
-    }
-}
-
-declare namespace $ {
-    var $mol_dom_context: typeof globalThis;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    function $mol_style_attach(id: string, text: string): HTMLStyleElement | null;
-}
-
-declare namespace $ {
     namespace $$ { }
     const $mol_object_field: unique symbol;
     class $mol_object extends $mol_object2 {
@@ -337,6 +316,23 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    var $mol_dom_context: typeof globalThis;
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_after_tick extends $mol_object2 {
+        task: () => void;
+        promise: any;
+        cancelled: boolean;
+        constructor(task: () => void);
+        destructor(): void;
+    }
+}
+
+declare namespace $ {
     class $mol_view_selection extends $mol_object {
         static focused(next?: Element[], notify?: 'notify'): Element[];
     }
@@ -429,6 +425,10 @@ declare namespace $ {
 
 declare namespace $ {
     type $mol_type_pick<Input, Upper> = Pick<Input, $mol_type_keys_extract<Input, Upper>>;
+}
+
+declare namespace $ {
+    function $mol_style_attach(id: string, text: string): HTMLStyleElement | null;
 }
 
 declare namespace $ {
@@ -843,15 +843,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_theme_auto extends $mol_plugin {
-        attr(): {
-            mol_theme: string;
-        };
-        theme(): string;
-    }
-}
-
-declare namespace $ {
     let $mol_action: typeof $mol_wire_method;
 }
 
@@ -911,12 +902,6 @@ declare namespace $ {
 
 declare namespace $ {
     function $mol_lights(this: $, next?: boolean): boolean;
-}
-
-declare namespace $.$$ {
-    class $mol_theme_auto extends $.$mol_theme_auto {
-        theme(): "$mol_theme_light" | "$mol_theme_dark";
-    }
 }
 
 declare namespace $ {
@@ -1454,26 +1439,18 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-    class $mol_paragraph extends $mol_view {
-        line_height(): number;
-        letter_width(): number;
-        width_limit(): number;
-        row_width(): number;
-        sub(): readonly any[];
+    class $mol_theme_auto extends $mol_plugin {
+        attr(): {
+            mol_theme: string;
+        };
+        theme(): string;
     }
 }
 
 declare namespace $.$$ {
-    class $mol_paragraph extends $.$mol_paragraph {
-        maximal_width(): number;
-        width_limit(): number;
-        minimal_width(): number;
-        row_width(): number;
-        minimal_height(): number;
+    class $mol_theme_auto extends $.$mol_theme_auto {
+        theme(): "$mol_theme_light" | "$mol_theme_dark";
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -1663,16 +1640,88 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    class $mol_icon_minus extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_plus extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_number extends $mol_view {
+        precision_view(): number;
+        precision_change(): number;
+        value_min(): number;
+        value_max(): number;
+        value(next?: any): number;
+        enabled(): boolean;
+        sub(): readonly any[];
+        precision(): number;
+        type(): string;
+        value_string(val?: any): string;
+        hint(): string;
+        string_enabled(): boolean;
+        String(): $$.$mol_string;
+        event_dec(next?: any): any;
+        dec_enabled(): boolean;
+        dec_icon(): $mol_icon_minus;
+        Dec(): $mol_button_minor;
+        event_inc(next?: any): any;
+        inc_enabled(): boolean;
+        inc_icon(): $mol_icon_plus;
+        Inc(): $mol_button_minor;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_number extends $.$mol_number {
+        value_limited(next?: any): number;
+        event_dec(next?: Event): void;
+        event_inc(next?: Event): void;
+        value_string(next?: string): string;
+        dec_enabled(): boolean;
+        inc_enabled(): boolean;
+    }
+}
+
+declare namespace $ {
+    class $mol_paragraph extends $mol_view {
+        line_height(): number;
+        letter_width(): number;
+        width_limit(): number;
+        row_width(): number;
+        sub(): readonly any[];
+    }
+}
+
+declare namespace $.$$ {
+    class $mol_paragraph extends $.$mol_paragraph {
+        maximal_width(): number;
+        width_limit(): number;
+        minimal_width(): number;
+        row_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     class $zede_playground extends $mol_page {
         title(): string;
+        tools(): readonly any[];
         plugins(): readonly any[];
         body(): readonly any[];
-        Theme(): $$.$mol_theme_auto;
         Lighter(): $$.$mol_lights_toggle;
-        Panel(): $zede_playground_panel;
-    }
-    class $zede_playground_panel extends $mol_view {
-        sub(): readonly any[];
+        Theme(): $$.$mol_theme_auto;
         Color1(): $zede_playground_color;
         Color2(): $zede_playground_color;
         Color3(): $zede_playground_color;
@@ -1684,6 +1733,43 @@ declare namespace $ {
         Color9(): $zede_playground_color;
         Color10(): $zede_playground_color;
         Color11(): $zede_playground_color;
+        Themes(): $mol_view;
+        Panel2(): $zede_playground_panel;
+    }
+    class $zede_playground_panel extends $mol_view {
+        sub(): readonly any[];
+        h(next?: any): number;
+        s(next?: any): number;
+        l(next?: any): number;
+        a(next?: any): number;
+        color(): {
+            h: number;
+            s: number;
+            l: number;
+            a: number;
+        };
+        Output(): $$.$zede_playground_color_output;
+        Title(): $mol_view;
+        Hue(): $zede_playground_number;
+        Saturation(): $zede_playground_number;
+        Lightness(): $zede_playground_number;
+        Alpha(): $zede_playground_number;
+    }
+    class $zede_playground_number extends $mol_number {
+        value_min(): number;
+        value_max(): number;
+        precision_change(): number;
+        precision_view(): number;
+    }
+    class $zede_playground_color_output extends $mol_view {
+        color(): {
+            h: number;
+            s: number;
+            l: number;
+            a: number;
+        };
+        sub(): readonly any[];
+        Color(): $zede_playground_color;
     }
     class $zede_playground_color extends $mol_view {
         color(): string;
@@ -1704,6 +1790,13 @@ declare namespace $ {
         name_hint2(): string;
         lastName(val?: any): string;
         LastName(): $$.$mol_string;
+    }
+}
+
+declare namespace $.$$ {
+    class $zede_playground_color_output extends $.$zede_playground_color_output {
+        transformByPrecision(number: number, precision?: number): number;
+        formatted(): string;
     }
 }
 
