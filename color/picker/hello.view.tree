@@ -1,0 +1,14 @@
+$mol_app_hello $mol_view
+	sub /
+		<= Greeting $zede_colorPicker
+			greeting <= greet \ Test
+		<= Name $mol_string
+			hint <= name_hint \Name
+			value?val <=> name?val \
+		<= LastName $mol_string
+			hint <= name_hint2 \LastName
+			value?val <=> lastName?val \
+
+$zede_colorPicker $mol_view
+	sub /
+		<= greeting \
