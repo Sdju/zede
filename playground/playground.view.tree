@@ -1,0 +1,81 @@
+$zede_playground $mol_page
+	title \ Zede tests
+	plugins /
+		<= Theme $mol_theme_auto
+	body /
+		<= Lighter $mol_lights_toggle
+		<= Panel $zede_playground_panel
+
+$zede_playground_panel $mol_view
+	sub /
+		<= Color1 $zede_playground_color
+			color \ var(--mol_theme_back)
+		<= Color2 $zede_playground_color
+			color \ var(--mol_theme_text)
+		<= Color3 $zede_playground_color
+			color \ var(--mol_theme_field)
+		<= Color4 $zede_playground_color
+			color \ var(--mol_theme_card)
+		<= Color5 $zede_playground_color
+			color \ var(--mol_theme_hover)
+		<= Color6 $zede_playground_color
+			color \ var(--mol_theme_line)
+		<= Color7 $zede_playground_color
+			color \ var(--mol_theme_shade)
+		<= Color8 $zede_playground_color
+			color \ var(--mol_theme_control)
+		<= Color9 $zede_playground_color
+			color \ var(--mol_theme_current)
+		<= Color10 $zede_playground_color
+			color \ var(--mol_theme_special)
+		<= Color11 $zede_playground_color
+			color \ var(--mol_theme_focus)
+
+$zede_playground_color $mol_view
+	color \ var(--mol_theme_line)
+	style *
+		backgroundColor <= color 
+	sub /
+		<= Title $mol_paragraph 
+			title <= color
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$zede_playground_prev $mol_page
+	title \ Zede tests
+	body /
+		<= Greeting $zede_color_picker
+			greeting <= greet \ Test
+		<= Name $mol_string
+			hint <= name_hint \Name
+			value?val <=> name?val \
+		<= LastName $mol_string
+			hint <= name_hint2 \LastName
+			value?val <=> lastName?val \

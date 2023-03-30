@@ -1,0 +1,3 @@
+namespace $ { $mol_style_attach( "zede/playground/playground.view.css",
+ ":root {\n\t--zede_playground_chess: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADFJREFUOE9jZGBgEGHAD97gk2YcNYBhmIQBgWSAP52AwoAQwJvQRg1gACckQoC2gQgAIF8IscwEtKYAAAAASUVORK5CYII=');\n}\n\n[zede_playground_color] {\n\tborder: 1px solid var(--mol_theme_line);\n\tmargin: 8px;\n\tpadding: 8px;\n\ttext-shadow: 0 0 3px black;\n}\n\n[zede_playground_panel] {\n\tbackground-color: var(--mol_theme_card);\n\tborder: var(--mol_theme_line);\n\tbox-shadow: 0 0 20px black;\n\tcolor: var(--mol_theme_text);\n\tpadding: 20px;\n\tmax-width: 350px;\n\t\n\tdisplay: flex;\n\tflex-direction: column;\n}\n"
+) }
